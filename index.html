@@ -606,5 +606,14 @@
 
   <!-- Custom JS -->
   <script src="js/script.js"></script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-label="Image preview" aria-hidden="true" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)" aria-label="Previous image">&#10094;</button>
+    <img id="lightboxImg" src="" alt="Enlarged screenshot">
+    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)" aria-label="Next image">&#10095;</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
 </body>
 </html>

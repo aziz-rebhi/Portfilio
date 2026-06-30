@@ -257,4 +257,59 @@ document.addEventListener('DOMContentLoaded', function () {
     langBarObserver.observe(card);
   });
 
+  // ==========================================================
+  // 11. Lightbox — click gallery image to preview
+  // ==========================================================
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  let lightboxImages = [];
+  let currentIndex = 0;
+
+  function openLightbox(src, index, images) {
+    lightboxImages = images;
+    currentIndex = index;
+    lightboxImg.src = src;
+    lightboxImg.alt = images[index].alt || '';
+    lightboxCounter.textContent = (index + 1) + ' / ' + images.length;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== e.currentTarget) return;
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lightboxImg.src = '';
+  }
+
+  function navigateLightbox(dir) {
+    const newIndex = (currentIndex + dir + lightboxImages.length) % lightboxImages.length;
+    const img = lightboxImages[newIndex];
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || '';
+    currentIndex = newIndex;
+    lightboxCounter.textContent = (newIndex + 1) + ' / ' + lightboxImages.length;
+  }
+
+  // Bind click on gallery images
+  document.querySelectorAll('.modal-gallery img').forEach(function (img, i) {
+    img.addEventListener('click', function () {
+      const parent = this.closest('.modal-gallery');
+      const siblings = parent.querySelectorAll('img');
+      const images = Array.from(siblings);
+      openLightbox(this.src, images.indexOf(this), images);
+    });
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+  });
+
 });
