@@ -162,16 +162,13 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-white) !important;
 }
 .navbar-brand span { color: var(--cyan); }
-.navbar-brand::before {
-  content: '<';
-  color: var(--cyan);
-  margin-right: 2px;
+.brand-logo {
+  height: 50px;
+  width: auto;
+  display: block;
+  filter: brightness(1) invert(0);
 }
-.navbar-brand::after {
-  content: '/>';
-  color: var(--cyan);
-  margin-left: 2px;
-}
+
 .nav-link {
   color: var(--text-muted) !important;
   font-weight: 500;
