@@ -294,6 +294,10 @@ document.addEventListener('DOMContentLoaded', function () {
     lightboxCounter.textContent = (newIndex + 1) + ' / ' + lightboxImages.length;
   }
 
+  // Expose globally for inline onclick handlers in HTML
+  window.closeLightbox = closeLightbox;
+  window.navigateLightbox = navigateLightbox;
+
   // Bind click on gallery images
   document.querySelectorAll('.modal-gallery img').forEach(function (img, i) {
     img.addEventListener('click', function () {
