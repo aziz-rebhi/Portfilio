@@ -108,13 +108,11 @@ h1, h2, h3, h4, h5, h6 {
 .preloader-content {
   text-align: center;
 }
-.preloader-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--cyan);
+.preloader-logo-img {
+  height: 64px;
+  width: auto;
   display: block;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
   animation: preloaderPulse 1.2s ease-in-out infinite;
 }
 .preloader-bar {
@@ -163,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .navbar-brand span { color: var(--cyan); }
 .brand-logo {
-  height: 32px;
+  height: 50px;
   width: auto;
   display: block;
   filter: brightness(1) invert(0);
