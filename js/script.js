@@ -139,72 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ==========================================================
-  // 7. Contact form — Formspree AJAX
-  // ==========================================================
-  const form = document.getElementById('contactForm');
-  const feedbackEl = document.getElementById('formFeedback');
-  const submitBtn = document.getElementById('formSubmitBtn');
-
-  if (form && feedbackEl && submitBtn) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // Reset feedback
-      feedbackEl.classList.remove('show', 'success', 'error');
-
-      // Bootstrap client-side validation
-      if (!form.checkValidity()) {
-        feedbackEl.textContent = 'Please fill in all required fields correctly.';
-        feedbackEl.className = 'form-feedback show error';
-        form.classList.add('was-validated');
-        return;
-      }
-
-      // Disable button during submission
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending... <i class="bi bi-hourglass-split ms-2" aria-hidden="true"></i>';
-
-      // AJAX to Formspree
-      const formData = new FormData(form);
-
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (response) {
-        if (response.ok) {
-          feedbackEl.textContent = 'Thank you! Your message has been received. I will get back to you soon.';
-          feedbackEl.className = 'form-feedback show success';
-          form.reset();
-          form.classList.remove('was-validated');
-        } else {
-          // Formspree returns 200+ with JSON body, but handle non-OK too
-          return response.json().then(function (data) {
-            if (data.error) {
-              throw new Error(data.error);
-            }
-            feedbackEl.textContent = 'Thank you! Your message has been received. I will get back to you soon.';
-            feedbackEl.className = 'form-feedback show success';
-            form.reset();
-            form.classList.remove('was-validated');
-          });
-        }
-      })
-      .catch(function (err) {
-        feedbackEl.textContent = 'Oops! Something went wrong. Please try again later or email me directly.';
-        feedbackEl.className = 'form-feedback show error';
-      })
-      .finally(function () {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Send Message <i class="bi bi-send ms-2" aria-hidden="true"></i>';
-      });
-    });
-  }
-
-  // ==========================================================
-  // 8. Back to Top
+  // 7. Back to Top
   // ==========================================================
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', function () {
